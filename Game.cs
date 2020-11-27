@@ -108,6 +108,8 @@ namespace Adventure
 
         private void Update()
         {
+            Console.WriteLine("Please enter 1 to view the location list,");
+            Console.WriteLine("and 2 for the current location, and 3 for moving to another location");
             //collecte user feedback, update location
             var input = Console.ReadLine();
             int selectlist = 0;
@@ -120,18 +122,46 @@ namespace Adventure
             switch(selectlist)
             {
                 case 1:
-                for(int listone = 0; listone < locationList.Length; listone++)
-                {
-                    locationList[listone].Describe();
-                }
-                break;
+                    for(int listone = 0; listone < locationList.Length; listone++)
+                    {
+                        int number = listone + 1;
+                        Console.Write(number);
+                        locationList[listone].Describe();
+                    }
+                    break;
 
                 case 2:
-                for(int listthree = 0; listthree < ItemList.Length; listthree++)
-                {
-                    ItemList[listthree].itemDescribe();
-                }
-                break;
+                    currentlocation.Describe();
+                    break;
+                
+                case 3:
+                    Console.WriteLine( "You may go to (1)home, (2)the hospital, and (3)the library now" );
+                    var MoveInput = Console.ReadLine();
+                    int selectmove = 0;
+                    if (!int.TryParse( MoveInput, out selectmove ))
+                    {
+                        Console.WriteLine( "Invalid Input" );
+                        return;
+                    }
+                    switch (selectmove)
+                    {
+                        case 1:
+                            currentlocation = locationList[0];
+                            Console.WriteLine( "You are at Jonathan's home now" ); 
+                            break;
+                        case 2:
+                            currentlocation = locationList[1];
+                            Console.WriteLine( "You are in the hospital now" ); 
+                            break;
+                        case 3:
+                            currentlocation = locationList[3];
+                            Console.WriteLine( "You are in the library now" ); 
+                            break;
+                        default:
+                        Console.WriteLine( "invalid number, please enter a number within 1,2,3" );
+                        break;  
+                    }
+                    break;
 
                 default:
                 Console.WriteLine( "Your selection is invalid, please choose again" );
@@ -165,9 +195,9 @@ namespace Adventure
             }
             */
 
-            locationList[currentIndex].visit();
+            //locationList[currentIndex].visit();
             
-            maxRetries--;
+            //maxRetries--;
             if (maxRetries < 1)
             {
                 Console.WriteLine("Game Over"); 
@@ -199,36 +229,6 @@ namespace Adventure
         }
             
 
-        
-        
-        private void sampleFlowControl()
-        {
-            //If staements
-
-            maxRetries--;
-            //comparison operators: <>,<=,>=,!=
-            //boolean operators:    && || !
-            if ((gameOver)||(maxRetries < 1))
-            {
-                //write a game over message on the screen
-                maxRetries = 0;
-            }
-            else
-            {
-                //do something else
-            }
-
-            //doing things multiple times
-            while (!gameOver)
-            {
-                //danger!
-                maxRetries--;
-                if(maxRetries < 1)
-                {
-                    gameOver = true;
-                }
-            }
-        }
     }
 
 }

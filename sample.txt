@@ -1,0 +1,28 @@
+private void sampleFlowControl()
+        {
+            //If staements
+
+            maxRetries--;
+            //comparison operators: <>,<=,>=,!=
+            //boolean operators:    && || !
+            if ((gameOver)||(maxRetries < 1))
+            {
+                //write a game over message on the screen
+                maxRetries = 0;
+            }
+            else
+            {
+                //do something else
+            }
+
+            //doing things multiple times
+            while (!gameOver)
+            {
+                //danger!
+                maxRetries--;
+                if(maxRetries < 1)
+                {
+                    gameOver = true;
+                }
+            }
+        }
