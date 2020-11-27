@@ -30,7 +30,7 @@ namespace Adventure
             discovered = false;
         }
 
-        public void describe()
+        public void itemDescribe()
         {
             //output the description for the item player selected
             Console.WriteLine(ItemDe);

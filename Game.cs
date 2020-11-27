@@ -73,13 +73,12 @@ namespace Adventure
         {
             //initialize each character's status
             CharacterList[0] = new Character( "Jonathan", 1F, 5 );
-            //Jonathan is already a good friend to the players, so his initial impression is 1(the highest)
-            CharacterList[1] = new Character( "Mia", 0.3F, 2 );//Jonathan's elegant white cat
-            CharacterList[2] = new Character( "Nancy", 0.5F, 4 );//Nurse
-            CharacterList[3] = new Character( "Dr.Bond", 0.2F, 4 );//Jonathan's doctor friend
-            CharacterList[4] = new Character( "Old Leon", 0.2F, 5 );//Library keeper
-            CharacterList[5] = new Character( "Finn", 0.5F, 5 );//Petshop staff
-            CharacterList[6] = new Character( "Charlotte", 0.3F, 4 );//petshop owner
+            CharacterList[1] = new Character( "Mia", 0.3F, 2 );
+            CharacterList[2] = new Character( "Nancy", 0.5F, 4 );
+            CharacterList[3] = new Character( "Dr.Bond", 0.2F, 4 );
+            CharacterList[4] = new Character( "Old Leon", 0.2F, 5 );
+            CharacterList[5] = new Character( "Finn", 0.5F, 5 );
+            CharacterList[6] = new Character( "Charlotte", 0.3F, 4 );
             CharacterList[7] = new Character( "Amily", 0.1F, 8 );
             CharacterList[8] = new Character( "The Rotten Ghoul", 0F, 12 );
 
@@ -91,15 +90,8 @@ namespace Adventure
 
         }
 
-
-
         public void Run()
         {
-            //update the status of the player
-            //draw the desription on the screen
-            //provide the player with options/prompts
-            //get player input
-
             while(!gameOver)
             {
                 //update the status of the player
@@ -111,12 +103,45 @@ namespace Adventure
                 Render();
             }   
         }
+        
+
 
         private void Update()
         {
             //collecte user feedback, update location
             var input = Console.ReadLine();
+            int selectlist = 0;
+            if (!int.TryParse( input, out selectlist ))
+            {
+                Console.WriteLine( "Invalid Input" );
+                return;
+            }
+
+            switch(selectlist)
+            {
+                case 1:
+                for(int listone = 0; listone < locationList.Length; listone++)
+                {
+                    locationList[listone].Describe();
+                }
+                break;
+
+                case 2:
+                for(int listthree = 0; listthree < ItemList.Length; listthree++)
+                {
+                    ItemList[listthree].itemDescribe();
+                }
+                break;
+
+                default:
+                Console.WriteLine( "Your selection is invalid, please choose again" );
+                break;
+            }
+
+            
             //var selection = int.Parse( input );
+            /*
+            save for later use
             int selection = 0;
             if (!int.TryParse( input, out selection ))
             {
@@ -124,24 +149,22 @@ namespace Adventure
                 return;
             }
 
+            
             switch (selection)
             {
-                /*In the first choice of the game, 
-                no matter which option you choose,
-                you are going to "home"
-                */
                 case 1:
                 case 2:
                 case 3:
                     currentlocation = locationList[0];
-                    Console.WriteLine( "There's no response" ); //Jonathan does not respond to the player's action
+                    Console.WriteLine( "There's no response" ); 
                     break;
 
                 default:
                 Console.WriteLine( "Your selection is invalid, please choose again" );
                 break;
             }
-            
+            */
+
             locationList[currentIndex].visit();
             
             maxRetries--;
@@ -154,12 +177,15 @@ namespace Adventure
 
         private void Render()
         {
-            const int MAXOPTIONS = 5;
-
             //print nice stuff on screen
-            locationList[currentIndex].Describe();
+            
+            //locationList[currentIndex].Describe();
 
             //print nice prompts for next user input
+            
+            /*
+            using this in the future
+            const int MAXOPTIONS = 5;
             string prompt = "Enter your next action:";
 
             for(int option = 0; option < MAXOPTIONS; option++)
@@ -168,6 +194,8 @@ namespace Adventure
             }
 
             Console.WriteLine(prompt);
+            */
+
         }
             
 
