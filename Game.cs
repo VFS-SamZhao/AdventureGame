@@ -11,6 +11,10 @@ namespace Adventure
         private const int MAXLOCATIONS = 10;
         private const int MAXCHARACTERS = 9;
         private const int MAXITEMS = 8;
+        private const int MAP_SIZE = 4;
+
+        private Map _map;
+        private Player _thePlayer;
 
         private Location[] locationList = new Location[MAXLOCATIONS];
         private Character[] CharacterList = new Character[MAXCHARACTERS];
@@ -26,12 +30,19 @@ namespace Adventure
             InitGame();
             ItemInit();
             CharaStatusInit();
+            _thePlayer = new Player("Sam");
         }
 
         public void InitGame()
         {
+            _map = new Map( MAP_SIZE );
             //initialize our game map of locations
-            locationList[0] = new Location( 1, "Home" );
+            /*locationList[0] = (new Location( 1, "Home" ))
+                .AllowGo (Direction.EAST)
+                .AllowGo (Direction.SOUTH)
+                .visit()
+                .Describe();
+
             locationList[1] = new Location( 2, "The hospital" );
             locationList[2] = new Location( 3, "The hospital, 2nd floor" );
             locationList[3] = new Location( 4, "The library" );
@@ -47,7 +58,7 @@ namespace Adventure
             for (int index = 0; index < locationList.Length; index++)
             {
                 locationList[index].Unvisit();
-            }
+            }*/
 
         }
 
@@ -109,7 +120,7 @@ namespace Adventure
         private void Update()
         {
             Console.WriteLine("Please enter 1 to view the location list,");
-            Console.WriteLine("and 2 for the current location, and 3 for moving to another location");
+            Console.WriteLine("Please enter for the current location, and 3 for moving to another location");
             //collecte user feedback, update location
             var input = Console.ReadLine();
             int selectlist = 0;
