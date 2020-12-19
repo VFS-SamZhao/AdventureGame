@@ -20,9 +20,10 @@ namespace Adventure
             gameOver = false;
             maxRetries = 5;
             
-            _thePlayer = new Player("Sam");
+            _thePlayer = new Player("Sam", 0, 3);
 
             _map = new Map( MAP_SIZE );
+            
         }
 
 
@@ -57,9 +58,17 @@ namespace Adventure
             
             switch (selection)
             {
-                case 1:
-                case 2:
-                case 3:
+                case (int)Direction.NORTH:
+                    _thePlayer.GoNorth();
+                    break;
+                case (int)Direction.SOUTH:
+                    _thePlayer.GoSouth();
+                    break;
+                case (int)Direction.EAST:
+                    _thePlayer.GoEast();
+                    break;
+                case (int)Direction.WEST:
+                    _thePlayer.GoWest();
                     break;
 
                 default:
@@ -79,24 +88,22 @@ namespace Adventure
         }
         
         private void Render()
-        {
-            
-            const int MAXOPTIONS = 5;
-
-            var row = _thePlayer.Row();
-            var col = _thePlayer.Col();
-            var currentlocation = _map.At(row, col).Describe();
+        {          
+            var row = _thePlayer.Row;
+            var col = _thePlayer.Col;
+            var currentlocation = _map.At(row, col);
             currentlocation.Describe();
 
             string prompt = "Enter your next action:";
-            for(int option = 0; option < MAXOPTIONS; option++)
+            for(Direction d = Direction.NORTH; d <= Direction.WEST; d++)
             {
-                prompt += $"({option}) Choose option ({option})";
+                if (currentlocation.CanGo(d))
+                {
+                    Console.WriteLine(prompt += $"({d}) You can go ({d})");
+                }
+
             }
-
             Console.WriteLine(prompt);
-
-
         }
             
 
